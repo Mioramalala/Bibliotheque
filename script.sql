@@ -4,4 +4,7 @@ insert into CATEGORIE(CODECATEGORIE,LIBELLECATEGORIE,DUREEEMPRUTNCAT,PENALITECAT
 insert into CATEGORIE(CODECATEGORIE,LIBELLECATEGORIE,DUREEEMPRUTNCAT,PENALITECAT) values(nextval('seqcat')||'cat','Aventure',18,20);
 insert into CATEGORIE(CODECATEGORIE,LIBELLECATEGORIE,DUREEEMPRUTNCAT,PENALITECAT) values(nextval('seqcat')||'cat','Policier',15,20);
 
+insert into TYPE(LIBELLETYPE) values('Membre');
+insert into TYPE(LIBELLETYPE) values('Admin');
+
 delele from CATEGORIE where 1=1;
