@@ -10,11 +10,32 @@ package s6.bibliotheque.modele;
  * @author itu
  */
 public class Categorie {
+    private int idcategorie;
     private String codecategorie;
     private String libellecategorie;
-    private String dureeempruntcat;
-    private String penalitecat;
+    private int dureeempruntcat;
+    private int penalitecat;
+    
+    public Categorie()
+    {
+        
+    }
+    
+    public Categorie(String libellecategorie,int dureeempruntcat,int penalitecat)
+    {
+        this.setLibellecategorie(libellecategorie);
+        this.setDureeempruntcat(dureeempruntcat);
+        this.setPenalitecat(penalitecat);
+    }
 
+    public int getIdcategorie() {
+        return idcategorie;
+    }
+
+    public void setIdcategorie(int idcategorie) {
+        this.idcategorie = idcategorie;
+    }
+    
     public String getCodecategorie() {
         return codecategorie;
     }
@@ -31,19 +52,19 @@ public class Categorie {
         this.libellecategorie = libellecategorie;
     }
 
-    public String getDureeempruntcat() {
+    public int getDureeempruntcat() {
         return dureeempruntcat;
     }
 
-    public void setDureeempruntcat(String dureeempruntcat) {
+    public void setDureeempruntcat(int dureeempruntcat) {
         this.dureeempruntcat = dureeempruntcat;
     }
 
-    public String getPenalitecat() {
+    public int getPenalitecat() {
         return penalitecat;
     }
 
-    public void setPenalitecat(String penalitecat) {
+    public void setPenalitecat(int penalitecat) {
         this.penalitecat = penalitecat;
     }
 }

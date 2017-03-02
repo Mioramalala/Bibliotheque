@@ -16,6 +16,16 @@ public class Ouvrage {
     private String editeurouvrage;
     private int nombrepage;
     private int nombreouvrage;
+    
+    public Ouvrage(String codeouvrage,String titreouvrage,String auteurouvrage,String editeurouvrage,int nombrepage,int nombreouvrage)
+    {
+        this.setCodeouvrage(codeouvrage);
+        this.setTitreouvrage(titreouvrage);
+        this.setAuteurouvrage(auteurouvrage);
+        this.setEditeurouvrage(editeurouvrage);
+        this.setNombrepage(nombrepage);
+        this.setNombreouvrage(nombreouvrage);
+    }
 
     public String getCodeouvrage() {
         return codeouvrage;

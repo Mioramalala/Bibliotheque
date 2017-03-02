@@ -11,6 +11,16 @@ package s6.bibliotheque.modele;
  */
 public class Type {
     private String libelletype;
+    
+    public Type()
+    {
+        
+    }
+    
+    public Type(String libelletype)
+    {
+        this.setLibelletype(libelletype);
+    }
 
     public String getLibelletype() {
         return libelletype;

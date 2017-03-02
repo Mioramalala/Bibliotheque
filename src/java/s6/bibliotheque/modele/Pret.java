@@ -14,6 +14,17 @@ import java.util.Date;
 public class Pret {
     private String codepret;
     private Date dateemprunt;
+    
+    public Pret()
+    {
+        
+    }
+    
+    public Pret(String codepret,Date dateemprunt)
+    {
+        this.setCodepret(codepret);
+        this.setDateemprunt(dateemprunt);
+    }
 
     public String getCodepret() {
         return codepret;

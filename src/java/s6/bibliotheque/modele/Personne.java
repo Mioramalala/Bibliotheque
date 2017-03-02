@@ -18,6 +18,21 @@ public class Personne {
     private String adressemembre;
     private Date dateNaissanceMembre;
     private int contact;
+    
+    public Personne()
+    {
+        
+    }
+    
+    public Personne(String codemembre,String nommembre,String prenommembre,String adressemembre,Date dateNaissanceMembre,int contact)
+    {
+        this.setCodemembre(codemembre);
+        this.setNommembre(nommembre);
+        this.setPrenommembre(prenommembre);
+        this.setAdressemembre(adressemembre);
+        this.setDateNaissanceMembre(dateNaissanceMembre);
+        this.setContact(contact);
+    }
 
     public String getCodemembre() {
         return codemembre;

@@ -11,8 +11,18 @@ import java.util.Date;
  *
  * @author itu
  */
-public class RettourPret {
+public class RetourPret {
     private Date dateretour;
+    
+    public RetourPret()
+    {
+        
+    }
+    
+    public RetourPret(Date dateretour)
+    {
+        this.setDateretour(dateretour);
+    }
 
     public Date getDateretour() {
         return dateretour;
