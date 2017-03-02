@@ -1,3 +1,8 @@
+create sequence seqcat start 101;
+create sequence seqouvr start 101;
+create sequence seqpers start 101;
+create sequence seqpret start 101;
+
 insert into CATEGORIE(CODECATEGORIE,LIBELLECATEGORIE,DUREEEMPRUTNCAT,PENALITECAT) values(nextval('seqcat')||'cat','Roman',10,20);
 insert into CATEGORIE(CODECATEGORIE,LIBELLECATEGORIE,DUREEEMPRUTNCAT,PENALITECAT) values(nextval('seqcat')||'cat','Bande dessinees',15,15);
 insert into CATEGORIE(CODECATEGORIE,LIBELLECATEGORIE,DUREEEMPRUTNCAT,PENALITECAT) values(nextval('seqcat')||'cat','Poesie',10,15);
