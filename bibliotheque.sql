@@ -1,14 +1,12 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     02/03/2017 14:43:58                          */
+/* Created on:     02/03/2017 15:49:39                          */
 /*==============================================================*/
 
 
 drop index CATEGORIE_PK;
 
 drop table CATEGORIE;
-
-drop index ASSOCIATION_2_FK;
 
 drop index ASSOCIATION_1_FK;
 
@@ -23,6 +21,8 @@ drop index PERSONNE_PK;
 drop table PERSONNE;
 
 drop index ASSOCIATION_3_FK;
+
+drop index ASSOCIATION_2_FK;
 
 drop index PRET_PK;
 
@@ -63,7 +63,6 @@ IDCATEGORIE
 create table OUVRAGE (
    IDOUVRAGE            SERIAL               not null,
    IDCATEGORIE          INT4                 not null,
-   IDPRET               INT4                 not null,
    CODEOUVRAGE          VARCHAR(10)          not null,
    TITRREOUVRAGE        VARCHAR(50)          null,
    AUTEUROUVRAGE        VARCHAR(50)          null,
@@ -85,13 +84,6 @@ IDOUVRAGE
 /*==============================================================*/
 create  index ASSOCIATION_1_FK on OUVRAGE (
 IDCATEGORIE
-);
-
-/*==============================================================*/
-/* Index: ASSOCIATION_2_FK                                      */
-/*==============================================================*/
-create  index ASSOCIATION_2_FK on OUVRAGE (
-IDPRET
 );
 
 /*==============================================================*/
@@ -128,6 +120,7 @@ IDTYPE
 create table PRET (
    IDPRET               SERIAL               not null,
    IDMEMBRE             INT4                 null,
+   IDOUVRAGE            INT4                 not null,
    CODEPRET             VARCHAR(10)          not null,
    DATEEMPRUNT          DATE                 null,
    constraint PK_PRET primary key (IDPRET)
@@ -138,6 +131,13 @@ create table PRET (
 /*==============================================================*/
 create unique index PRET_PK on PRET (
 IDPRET
+);
+
+/*==============================================================*/
+/* Index: ASSOCIATION_2_FK                                      */
+/*==============================================================*/
+create  index ASSOCIATION_2_FK on PRET (
+IDOUVRAGE
 );
 
 /*==============================================================*/
@@ -192,14 +192,14 @@ alter table OUVRAGE
       references CATEGORIE (IDCATEGORIE)
       on delete restrict on update restrict;
 
-alter table OUVRAGE
-   add constraint FK_OUVRAGE_ASSOCIATI_PRET foreign key (IDPRET)
-      references PRET (IDPRET)
-      on delete restrict on update restrict;
-
 alter table PERSONNE
    add constraint FK_PERSONNE_ASSOCIATI_TYPE foreign key (IDTYPE)
       references TYPE (IDTYPE)
+      on delete restrict on update restrict;
+
+alter table PRET
+   add constraint FK_PRET_ASSOCIATI_OUVRAGE foreign key (IDOUVRAGE)
+      references OUVRAGE (IDOUVRAGE)
       on delete restrict on update restrict;
 
 alter table PRET
