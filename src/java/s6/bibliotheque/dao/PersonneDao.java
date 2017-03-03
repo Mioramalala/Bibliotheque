@@ -10,23 +10,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import s6.bibliotheque.modele.Categorie;
+import s6.bibliotheque.modele.Personne;
+import s6.bibliotheque.modele.Type;
 
 /**
  *
  * @author itu
  */
-public class CategorieDao {
-
-    public void saveCategorie(Categorie cat) throws Exception {
+public class PersonneDao {
+    public void savePersonne(Personne pers) throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         try {
             conn = Connect.getCon();
-            stat = conn.prepareStatement("insert into CATEGORIE(CODECATEGORIE,LIBELLECATEGORIE,DUREEEMPRUTNCAT,PENALITECAT) values(nextval('seqcat')||'cat',?,?,?)");
-            stat.setString(1, cat.getLibellecategorie());
-            stat.setInt(2, cat.getDureeempruntcat());
-            stat.setInt(3, cat.getPenalitecat());
+            stat = conn.prepareStatement("insert into PERSONNE(IDTYPE,CODEMEMBRE,NOMMEMBRE,PRENOMMEMBRE,ADRESSEMEMBRE,CONTACT) values(?,nextval('seqpers')||pers,?,?,?,?)");
+            stat.setInt(1, pers.getIdtype());
+            stat.setString(2, pers.getNommembre());
+            stat.setString(3, pers.getPrenommembre());
+            stat.setString(4, pers.getAdressemembre());
+            stat.setInt(5, pers.getContact());
             stat.executeUpdate();
         } catch (Exception ex) {
             System.out.println(ex);
@@ -41,13 +43,13 @@ public class CategorieDao {
         }
     }
 
-    public void deleteCategorie(Categorie cat) throws Exception {
+    public void deletePersonne(Personne pers) throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         try {
             conn = Connect.getCon();
-            stat = conn.prepareStatement("DELETE FROM CATEGORIE where codecategorie=?");
-            stat.setString(1, cat.getCodecategorie());
+            stat = conn.prepareStatement("DELETE FROM PERSONNE where codemembre=?");
+            stat.setInt(1, pers.getIdtype());
             stat.executeUpdate();
         } catch (Exception e) {
             throw e;
@@ -61,25 +63,28 @@ public class CategorieDao {
         }
     }
 
-    public List<Categorie> findAllCategorie() throws Exception {
+    public List<Personne> findAllPersonne() throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         ResultSet rs = null;
-        List<Categorie> listCat = new ArrayList<Categorie>();
+        List<Personne> pers = new ArrayList<Personne>();
         try {
             conn = Connect.getCon();
-            String selectSQL = "SELECT * FROM CATEGORIE";
+            String selectSQL = "SELECT * FROM PERSONNE";
             stat = conn.prepareStatement(selectSQL);
             rs = stat.executeQuery();
             while (rs.next()) {
-                Categorie temp = new Categorie();
-                temp.setCodecategorie(rs.getString(2));
-                temp.setLibellecategorie(rs.getString(3));
-                temp.setDureeempruntcat(rs.getInt(4));
-                temp.setPenalitecat(rs.getInt(5));
-                listCat.add(temp);
+                Personne temp = new Personne();
+                temp.setIdpersonne(rs.getInt(1));
+                temp.setIdtype(rs.getInt(2));
+                temp.setCodemembre(rs.getString(3));
+                temp.setNommembre(rs.getString(4));
+                temp.setPrenommembre(rs.getString(5));
+                temp.setAdressemembre(rs.getString(6));
+                temp.setContact(rs.getInt(6));
+                pers.add(temp);
             }
-            return listCat;
+            return pers;
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -95,24 +100,26 @@ public class CategorieDao {
         }
     }
 
-    public Categorie finbyIdCategorie(int id) throws Exception {
+    public Personne finbyIdPersonne(int id) throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         ResultSet rs = null;
-        Categorie categori = new Categorie();
+        Personne pers = new Personne();
         try {
             conn = Connect.getCon();
-            String selectSQL = "SELECT * FROM CATEGORIE where idcategorie=" + id;
+            String selectSQL = "SELECT * FROM PERSONNE where idpersonne=" + id;
             stat = conn.prepareStatement(selectSQL);
             rs = stat.executeQuery();
             while (rs.next()) {
-                categori.setIdcategorie(rs.getInt(1));
-                categori.setCodecategorie(rs.getString(2));
-                categori.setLibellecategorie(rs.getString(3));
-                categori.setDureeempruntcat(rs.getInt(4));
-                categori.setPenalitecat(rs.getInt(5));
+                pers.setIdpersonne(rs.getInt(1));
+                pers.setIdtype(rs.getInt(2));
+                pers.setCodemembre(rs.getString(3));
+                pers.setNommembre(rs.getString(4));
+                pers.setPrenommembre(rs.getString(5));
+                pers.setAdressemembre(rs.getString(6));
+                pers.setContact(rs.getInt(6));
             }
-            return categori;
+            return pers;
         } catch (Exception ex) {
             throw ex;
         } finally {

@@ -12,6 +12,9 @@ import java.util.Date;
  * @author itu
  */
 public class Personne {
+    private int idpersonne;
+    private int idtype;
+    private Type type;
     private String codemembre;
     private String nommembre;
     private String prenommembre;
@@ -24,14 +27,49 @@ public class Personne {
         
     }
     
-    public Personne(String codemembre,String nommembre,String prenommembre,String adressemembre,Date dateNaissanceMembre,int contact)
+    public Personne(String nommembre,String prenommembre,String adressemembre,Date dateNaissanceMembre,int contact)
     {
+        this.setNommembre(nommembre);
+        this.setPrenommembre(prenommembre);
+        this.setAdressemembre(adressemembre);
+        this.setDateNaissanceMembre(dateNaissanceMembre);
+        this.setContact(contact);
+    }
+    
+    public Personne(int idpersonne, Type type, String codemembre,String nommembre,String prenommembre,String adressemembre,Date dateNaissanceMembre,int contact)
+    {
+        this.setIdpersonne(idpersonne);
+        this.setIdtype(type.getIdtype());
         this.setCodemembre(codemembre);
         this.setNommembre(nommembre);
         this.setPrenommembre(prenommembre);
         this.setAdressemembre(adressemembre);
         this.setDateNaissanceMembre(dateNaissanceMembre);
         this.setContact(contact);
+    }
+
+    public int getIdpersonne() {
+        return idpersonne;
+    }
+
+    public void setIdpersonne(int idpersonne) {
+        this.idpersonne = idpersonne;
+    }
+
+    public int getIdtype() {
+        return idtype;
+    }
+
+    public void setIdtype(int idtype) {
+        this.idtype = idtype;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String getCodemembre() {

@@ -27,6 +27,15 @@ public class Categorie {
         this.setDureeempruntcat(dureeempruntcat);
         this.setPenalitecat(penalitecat);
     }
+    
+    public Categorie(int idcategorie, String codecategorie, String libellecategorie,int dureeempruntcat,int penalitecat)
+    {
+        this.setIdcategorie(idcategorie);
+        this.setCodecategorie(codecategorie);
+        this.setLibellecategorie(libellecategorie);
+        this.setDureeempruntcat(dureeempruntcat);
+        this.setPenalitecat(penalitecat);
+    }
 
     public int getIdcategorie() {
         return idcategorie;

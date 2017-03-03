@@ -12,6 +12,8 @@ import java.util.Date;
  * @author itu
  */
 public class RetourPret {
+    private int idretour;
+    private int idpret;
     private Date dateretour;
     
     public RetourPret()
@@ -22,6 +24,29 @@ public class RetourPret {
     public RetourPret(Date dateretour)
     {
         this.setDateretour(dateretour);
+    }
+    
+    public RetourPret(int idretour, Pret pret, Date dateretour)
+    {
+        this.setIdretour(idretour);
+        this.setIdpret(pret.getIdpret());
+        this.setDateretour(dateretour);
+    }
+
+    public int getIdretour() {
+        return idretour;
+    }
+
+    public void setIdretour(int idretour) {
+        this.idretour = idretour;
+    }
+
+    public int getIdpret() {
+        return idpret;
+    }
+
+    public void setIdpret(int idpret) {
+        this.idpret = idpret;
     }
 
     public Date getDateretour() {

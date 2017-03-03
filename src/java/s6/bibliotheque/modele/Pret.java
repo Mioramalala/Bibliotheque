@@ -12,6 +12,9 @@ import java.util.Date;
  * @author itu
  */
 public class Pret {
+    private int idpret;
+    private int idmembre;
+    private int idouvrage;
     private String codepret;
     private Date dateemprunt;
     
@@ -20,10 +23,40 @@ public class Pret {
         
     }
     
-    public Pret(String codepret,Date dateemprunt)
+    public Pret(Date dateemprunt)
     {
+        this.setDateemprunt(dateemprunt);
+    }
+    
+    public Pret(int idpret, String codepret,Date dateemprunt)
+    {
+        this.setIdpret(idpret);
         this.setCodepret(codepret);
         this.setDateemprunt(dateemprunt);
+    }
+
+    public int getIdpret() {
+        return idpret;
+    }
+
+    public void setIdpret(int idpret) {
+        this.idpret = idpret;
+    }
+
+    public int getIdmembre() {
+        return idmembre;
+    }
+
+    public void setIdmembre(int idmembre) {
+        this.idmembre = idmembre;
+    }
+
+    public int getIdouvrage() {
+        return idouvrage;
+    }
+
+    public void setIdouvrage(int idouvrage) {
+        this.idouvrage = idouvrage;
     }
 
     public String getCodepret() {

@@ -11,22 +11,20 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import s6.bibliotheque.modele.Categorie;
+import s6.bibliotheque.modele.Type;
 
 /**
  *
  * @author itu
  */
-public class CategorieDao {
-
-    public void saveCategorie(Categorie cat) throws Exception {
+public class TypeDao {
+    public void saveType(Type type) throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         try {
             conn = Connect.getCon();
-            stat = conn.prepareStatement("insert into CATEGORIE(CODECATEGORIE,LIBELLECATEGORIE,DUREEEMPRUTNCAT,PENALITECAT) values(nextval('seqcat')||'cat',?,?,?)");
-            stat.setString(1, cat.getLibellecategorie());
-            stat.setInt(2, cat.getDureeempruntcat());
-            stat.setInt(3, cat.getPenalitecat());
+            stat = conn.prepareStatement("insert into TYPE(LIBELLETYPE) values(?)");
+            stat.setString(1, type.getLibelletype());
             stat.executeUpdate();
         } catch (Exception ex) {
             System.out.println(ex);
@@ -41,13 +39,13 @@ public class CategorieDao {
         }
     }
 
-    public void deleteCategorie(Categorie cat) throws Exception {
+    public void deleteType(Type type) throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         try {
             conn = Connect.getCon();
-            stat = conn.prepareStatement("DELETE FROM CATEGORIE where codecategorie=?");
-            stat.setString(1, cat.getCodecategorie());
+            stat = conn.prepareStatement("DELETE FROM TYPE where idtype=?");
+            stat.setInt(1, type.getIdtype());
             stat.executeUpdate();
         } catch (Exception e) {
             throw e;
@@ -61,25 +59,23 @@ public class CategorieDao {
         }
     }
 
-    public List<Categorie> findAllCategorie() throws Exception {
+    public List<Type> findAllType() throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         ResultSet rs = null;
-        List<Categorie> listCat = new ArrayList<Categorie>();
+        List<Type> type = new ArrayList<Type>();
         try {
             conn = Connect.getCon();
-            String selectSQL = "SELECT * FROM CATEGORIE";
+            String selectSQL = "SELECT * FROM TYPE";
             stat = conn.prepareStatement(selectSQL);
             rs = stat.executeQuery();
             while (rs.next()) {
-                Categorie temp = new Categorie();
-                temp.setCodecategorie(rs.getString(2));
-                temp.setLibellecategorie(rs.getString(3));
-                temp.setDureeempruntcat(rs.getInt(4));
-                temp.setPenalitecat(rs.getInt(5));
-                listCat.add(temp);
+                Type temp = new Type();
+                temp.setIdtype(rs.getInt(1));
+                temp.setLibelletype(rs.getString(2));
+                type.add(temp);
             }
-            return listCat;
+            return type;
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -95,24 +91,21 @@ public class CategorieDao {
         }
     }
 
-    public Categorie finbyIdCategorie(int id) throws Exception {
+    public Type finbyIdType(int id) throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         ResultSet rs = null;
-        Categorie categori = new Categorie();
+        Type type = new Type();
         try {
             conn = Connect.getCon();
-            String selectSQL = "SELECT * FROM CATEGORIE where idcategorie=" + id;
+            String selectSQL = "SELECT * FROM TYPE where idtype=" + id;
             stat = conn.prepareStatement(selectSQL);
             rs = stat.executeQuery();
             while (rs.next()) {
-                categori.setIdcategorie(rs.getInt(1));
-                categori.setCodecategorie(rs.getString(2));
-                categori.setLibellecategorie(rs.getString(3));
-                categori.setDureeempruntcat(rs.getInt(4));
-                categori.setPenalitecat(rs.getInt(5));
+                type.setIdtype(rs.getInt(1));
+                type.setLibelletype(rs.getString(2));
             }
-            return categori;
+            return type;
         } catch (Exception ex) {
             throw ex;
         } finally {

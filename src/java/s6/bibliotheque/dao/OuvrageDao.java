@@ -11,22 +11,25 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import s6.bibliotheque.modele.Categorie;
+import s6.bibliotheque.modele.Ouvrage;
 
 /**
  *
  * @author itu
  */
-public class CategorieDao {
-
-    public void saveCategorie(Categorie cat) throws Exception {
+public class OuvrageDao {
+    public void saveOuvrage(Ouvrage ouvr) throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         try {
             conn = Connect.getCon();
-            stat = conn.prepareStatement("insert into CATEGORIE(CODECATEGORIE,LIBELLECATEGORIE,DUREEEMPRUTNCAT,PENALITECAT) values(nextval('seqcat')||'cat',?,?,?)");
-            stat.setString(1, cat.getLibellecategorie());
-            stat.setInt(2, cat.getDureeempruntcat());
-            stat.setInt(3, cat.getPenalitecat());
+            stat = conn.prepareStatement("insert into OUVRAGE(IDCATEGORIE,CODEOUVRAGE,TITRREOUVRAGE,AUTEUROUVRAGE,EDITEUROUVRAGE,NOMBREPAGE,NOMBREOUVRAGE) values(nextval(?,'seqouvr')||'ouvr',?,?,?,?,?)");
+            stat.setInt(1, ouvr.getCat().getIdcategorie());
+            stat.setString(2, ouvr.getTitreouvrage());
+            stat.setString(3, ouvr.getAuteurouvrage());
+            stat.setString(4, ouvr.getEditeurouvrage());
+            stat.setInt(5, ouvr.getNombrepage());
+            stat.setInt(6, ouvr.getNombreouvrage());
             stat.executeUpdate();
         } catch (Exception ex) {
             System.out.println(ex);
@@ -41,13 +44,13 @@ public class CategorieDao {
         }
     }
 
-    public void deleteCategorie(Categorie cat) throws Exception {
+    public void deleteOuvrage(Ouvrage ouvr) throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         try {
             conn = Connect.getCon();
-            stat = conn.prepareStatement("DELETE FROM CATEGORIE where codecategorie=?");
-            stat.setString(1, cat.getCodecategorie());
+            stat = conn.prepareStatement("DELETE FROM OUVRAGE where codecategorie=?");
+            stat.setString(1, ouvr.getCodeouvrage());
             stat.executeUpdate();
         } catch (Exception e) {
             throw e;
@@ -61,25 +64,26 @@ public class CategorieDao {
         }
     }
 
-    public List<Categorie> findAllCategorie() throws Exception {
+    public List<Ouvrage> findAllOuvrage() throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         ResultSet rs = null;
-        List<Categorie> listCat = new ArrayList<Categorie>();
+        List<Ouvrage> listCat = new ArrayList<Ouvrage>();
         try {
             conn = Connect.getCon();
-            String selectSQL = "SELECT * FROM CATEGORIE";
+            String selectSQL = "SELECT * FROM OUVRAGE";
             stat = conn.prepareStatement(selectSQL);
             rs = stat.executeQuery();
             while (rs.next()) {
-                Categorie temp = new Categorie();
-                temp.setCodecategorie(rs.getString(2));
-                temp.setLibellecategorie(rs.getString(3));
-                temp.setDureeempruntcat(rs.getInt(4));
-                temp.setPenalitecat(rs.getInt(5));
+                Ouvrage temp = new Ouvrage();
+                temp.setCodeouvrage(rs.getString(2));
+                temp.setTitreouvrage(rs.getString(3));
+                temp.setAuteurouvrage(rs.getString(4));
+                temp.setEditeurouvrage(rs.getString(5));
+                temp.setNombrepage(rs.getInt(6));
+                temp.setNombreouvrage(rs.getInt(7));
                 listCat.add(temp);
             }
-            return listCat;
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -93,26 +97,30 @@ public class CategorieDao {
                 conn.close();
             }
         }
+        return listCat;
     }
 
-    public Categorie finbyIdCategorie(int id) throws Exception {
+    public Ouvrage finbyIdOuvrage(int id) throws Exception {
         Connection conn = null;
         PreparedStatement stat = null;
         ResultSet rs = null;
-        Categorie categori = new Categorie();
+        Ouvrage ouvr = new Ouvrage();
         try {
             conn = Connect.getCon();
-            String selectSQL = "SELECT * FROM CATEGORIE where idcategorie=" + id;
+            String selectSQL = "SELECT * FROM OUVRAGE where idouvrage="+id;
             stat = conn.prepareStatement(selectSQL);
             rs = stat.executeQuery();
             while (rs.next()) {
-                categori.setIdcategorie(rs.getInt(1));
-                categori.setCodecategorie(rs.getString(2));
-                categori.setLibellecategorie(rs.getString(3));
-                categori.setDureeempruntcat(rs.getInt(4));
-                categori.setPenalitecat(rs.getInt(5));
+                ouvr.setIdouvrage(rs.getInt(1));
+                ouvr.setIdcategorie(rs.getInt(2));
+                ouvr.setCodeouvrage(rs.getString(3));
+                ouvr.setTitreouvrage(rs.getString(4));
+                ouvr.setAuteurouvrage(rs.getString(5));
+                ouvr.setEditeurouvrage(rs.getString(6));
+                ouvr.setNombrepage(rs.getInt(7));
+                ouvr.setNombreouvrage(rs.getInt(8));
             }
-            return categori;
+            return ouvr;
         } catch (Exception ex) {
             throw ex;
         } finally {
