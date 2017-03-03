@@ -6,6 +6,7 @@
 package s6.bibliotheque.dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -20,47 +21,47 @@ import s6.bibliotheque.modele.Categorie;
  * @author itu
  */
 public class CategorieDaoTest {
-    
+
     public CategorieDaoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
     /**
      * Test of saveCategorie method, of class CategorieDao.
-     
+     */
     @Test
     public void testSaveCategorie() throws Exception {
         System.out.println("saveCategorie");
-        Categorie cat = new Categorie("Roman",10,20);
+        Categorie cat = new Categorie("Roman", 10, 20);
         CategorieDao instance = new CategorieDao();
         instance.saveCategorie(cat);
-    }*/
+    }
 
     /**
      * Test of deleteCategorie method, of class CategorieDao.
-     
+     */
     @Test
     public void testDeleteCategorie() throws Exception {
         System.out.println("deleteCategorie");
-        Categorie cat = new Categorie(7,"106cat","Etude",14,10);
+        Categorie cat = new Categorie(7, "106cat", "Etude", 14, 10);
         CategorieDao instance = new CategorieDao();
         instance.deleteCategorie(cat);
-    }*/
+    }
 
     /**
      * Test of findAllCategorie method, of class CategorieDao.
@@ -70,12 +71,14 @@ public class CategorieDaoTest {
         System.out.println("findAllCategorie");
         CategorieDao instance = new CategorieDao();
         List<Categorie> liste = new ArrayList<>();
-        Categorie cat1 = new Categorie(2,"102cat","Bande dessinees",15,15);
-        Categorie cat2 = new Categorie(3,"103cat","Poesi",10,15);
-        Categorie cat3 = new Categorie(4,"104cat","Aventure",18,20);
-        Categorie cat4 = new Categorie(5,"105cat","Policier",15,20);
-        Categorie cat5 = new Categorie(7,"107cat","Etude",14,10);
-        Categorie cat6 = new Categorie(8,"108cat","Rompan",10,20);
+        Categorie cat = new Categorie();
+        Categorie ca = new Categorie();
+        Categorie cat1 = new Categorie(2, "102cat", "Bande dessinees", 15, 15);
+        Categorie cat2 = new Categorie(3, "103cat", "Poesi", 10, 15);
+        Categorie cat3 = new Categorie(4, "104cat", "Aventure", 18, 20);
+        Categorie cat4 = new Categorie(5, "105cat", "Policier", 15, 20);
+        Categorie cat5 = new Categorie(7, "107cat", "Etude", 14, 10);
+        Categorie cat6 = new Categorie(8, "108cat", "Rompan", 10, 20);
         liste.add(cat1);
         liste.add(cat2);
         liste.add(cat3);
@@ -84,7 +87,13 @@ public class CategorieDaoTest {
         liste.add(cat6);
         List<Categorie> expResult = liste;
         List<Categorie> result = instance.findAllCategorie();
-        assertEquals(expResult, result);
+        for (Iterator<Categorie> it = expResult.iterator(); it.hasNext();) {
+            cat = it.next();
+        }
+        for (Iterator<Categorie> it2 = result.iterator(); it2.hasNext();) {
+            ca = it2.next();
+        }
+        assertEquals(cat.getCodecategorie(), ca.getCodecategorie());
     }
 
     /**
@@ -95,9 +104,9 @@ public class CategorieDaoTest {
         System.out.println("finbyIdCategorie");
         int id = 2;
         CategorieDao instance = new CategorieDao();
-        Categorie expResult = new Categorie(2,"102cat","Bande dessinees",15,15);
+        Categorie expResult = new Categorie(2, "102cat", "Bande dessinees", 15, 15);
         Categorie result = instance.finbyIdCategorie(id);
-        assertEquals(expResult, result);
+        assertEquals(expResult.getCodecategorie(), result.getCodecategorie());
     }
-    
+
 }

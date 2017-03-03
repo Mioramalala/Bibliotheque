@@ -19,8 +19,8 @@ public class Test {
     {
         Categorie cat = new Categorie();
         CategorieDao catDao = new CategorieDao();
-        Categorie ca = catDao.finbyIdCategorie(1);
-        System.out.println(cat);
+        Categorie ca = catDao.finbyIdCategorie(2);
+        System.out.println(ca.getCodecategorie());
         List<Categorie> liste = catDao.findAllCategorie();
         for (Iterator<Categorie> it = liste.iterator(); it.hasNext();) {
             cat = it.next();
